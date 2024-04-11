@@ -71,5 +71,5 @@ spec:
   owner: equipo_db
   system: devPortal
   dependsOn:
-    - component:portal
+    - component:default/portal
 ---
