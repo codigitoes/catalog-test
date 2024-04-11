@@ -1,3 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: artist-engagement-portal
+  description: Handy tools to keep artists in the loop
+spec:
+  owner: guest
+  system: devPortal
+  domain: devPortal
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
@@ -15,7 +24,7 @@ metadata:
 spec:
   type: frontend
   lifecycle: production
-  owner: equipo_frontend
+  owner: guest
   system: devPortal
   dependencyOf:
     - resource:default/portal-private-db
@@ -38,7 +47,7 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: equipo_api
+  owner: guest
   system: devPortal
   definition: |
     openapi: "3.0.0"
@@ -70,6 +79,6 @@ metadata:
 spec:
   type: database
   lifecycle: production
-  owner: equipo_db
+  owner: guest
   system: devPortal
 ---
