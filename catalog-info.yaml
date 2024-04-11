@@ -1,6 +1,6 @@
 ---
 apiVersion: backstage.io/v1alpha1
-kind: component
+kind: Resource
 metadata:
   name: portal
   description: Frontend web del portal
