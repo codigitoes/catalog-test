@@ -26,8 +26,6 @@ spec:
   owner: devportal
   system: devportal
   dependsOn:
-    - resource:default/portal-private-db
-  dependencyOf:
     - resource:default/portal-private-access
     - resource:default/portal-private-library
   consumesApi:
