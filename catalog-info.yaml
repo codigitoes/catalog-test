@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: devPortal
-  description: devPortal discovery infra demo
+  description: devPortal discovery demo
 spec:
   owner: guest
   system: devPortal
