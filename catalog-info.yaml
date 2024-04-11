@@ -17,6 +17,8 @@ spec:
   lifecycle: production
   owner: equipo_frontend
   system: devPortal
+  dependsOn:
+    - resource:default/portal-private-db
   providesApis:
     - portal-private-api
 ---
@@ -70,6 +72,4 @@ spec:
   lifecycle: production
   owner: equipo_db
   system: devPortal
-  dependsOn:
-    - component:default/portal
 ---
