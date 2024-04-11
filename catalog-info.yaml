@@ -25,7 +25,7 @@ spec:
   lifecycle: production
   owner: devportal
   system: devportal
-  dependsOn:
+  dependencyOf:
     - resource:default/portal-private-access
     - resource:default/portal-private-library
   consumesApi:
