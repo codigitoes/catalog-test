@@ -27,15 +27,12 @@ spec:
   system: devportal
   dependsOn:
     - resource:default/portal-private-db
-  providesApis:
+  dependencyOf:
+    - resource:default/portal-private-access
+    - resource:default/portal-private-library
+  consumesApi:
     - portal-private-access
     - portal-private-library
-#  dependencyOf:
-#    - resource:default/portal-private-access
-#    - resource:default/portal-private-library
-#  consumesApi:
-#    - portal-private-access
-#    - portal-private-library
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
