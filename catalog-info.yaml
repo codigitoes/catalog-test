@@ -70,4 +70,6 @@ spec:
   lifecycle: production
   owner: equipo_db
   system: devPortal
+  dependsOn:
+    - portal
 ---
