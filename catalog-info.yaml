@@ -17,7 +17,7 @@ spec:
   lifecycle: production
   owner: equipo_frontend
   system: devPortal
-  dependsOn:
+  dependencyOf:
     - resource:default/portal-private-db
   providesApis:
     - portal-private-api
