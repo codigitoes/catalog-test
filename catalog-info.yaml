@@ -1,15 +1,15 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: artist-engagement-portal
-  description: Handy tools to keep artists in the loop
+  name: devPortal
+  description: devPortal discovery infra demo
 spec:
   owner: guest
   system: devPortal
   domain: devPortal
 ---
 apiVersion: backstage.io/v1alpha1
-kind: Resource
+kind: Component
 metadata:
   name: portal
   description: Frontend web del portal
