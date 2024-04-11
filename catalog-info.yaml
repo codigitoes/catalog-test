@@ -28,7 +28,7 @@ spec:
   dependencyOf:
     - resource:default/portal-private-access
     - resource:default/portal-private-library
-  consumesApi:
+  consumesApis:
     - portal-private-access
     - portal-private-library
 ---
