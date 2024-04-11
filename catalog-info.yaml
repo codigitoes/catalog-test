@@ -8,7 +8,7 @@ spec:
   domain: devportal.demo
 ---
 apiVersion: backstage.io/v1alpha1
-kind: Resource
+kind: Component
 metadata:
   name: portal
   description: Frontend web del portal
@@ -25,12 +25,17 @@ spec:
   lifecycle: production
   owner: devportal
   system: devportal
-  dependencyOf:
-    - resource:default/portal-private-access
-    - resource:default/portal-private-library
-  consumesApi:
+  dependsOn:
+    - resource:default/portal-private-db
+  providesApis:
     - portal-private-access
     - portal-private-library
+#  dependencyOf:
+#    - resource:default/portal-private-access
+#    - resource:default/portal-private-library
+#  consumesApi:
+#    - portal-private-access
+#    - portal-private-library
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
@@ -51,7 +56,7 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
-  dependencyOf:
+  dependsOn:
     - resource:default/portal-private-db
   definition: |
     openapi: "3.0.0"
@@ -86,7 +91,7 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
-  dependencyOf:
+  dependsOn:
     - resource:default/portal-private-db
   definition: |
     openapi: "3.0.0"
