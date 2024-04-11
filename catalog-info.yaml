@@ -1,15 +1,14 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: devPortal
+  name: devportal
   description: devPortal discovery demo
 spec:
-  owner: guest
-  system: devPortal
-  domain: devPortal
+  owner: devportal
+  domain: devportal.demo
 ---
 apiVersion: backstage.io/v1alpha1
-kind: Component
+kind: Resource
 metadata:
   name: portal
   description: Frontend web del portal
@@ -24,10 +23,11 @@ metadata:
 spec:
   type: frontend
   lifecycle: production
-  owner: guest
-  system: devPortal
+  owner: devportal
+  system: devportal
   dependencyOf:
     - resource:default/portal-private-db
+    - resource:default/portal-private-api
   providesApis:
     - portal-private-api
 ---
@@ -47,8 +47,10 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: guest
-  system: devPortal
+  owner: devportal
+  system: devportal
+  dependencyOf:
+    - resource:default/portal-private-db
   definition: |
     openapi: "3.0.0"
     info:
@@ -79,6 +81,6 @@ metadata:
 spec:
   type: database
   lifecycle: production
-  owner: guest
-  system: devPortal
+  owner: devportal
+  system: devportal
 ---
