@@ -1,70 +1,73 @@
-relations:
-  - type: uses-service
-    target: portal-private-api
-    metadata:
-      type: api
-      environment: production
-  - type: uses-database
-    target: portal-private-db
-    metadata:
-      type: database
-      environment: production
-
-components:
-  - apiVersion: backstage.io/v1alpha1
-    kind: Component
-    metadata:
-      name: portal
-      description: Frontend web del portal
-      labels:
-        category: web
-        team: frontend_team
-      annotations:
-        deployment_strategy: canary
-      urls:
-        - url: https://github.com/mi_empresa/portal
-          type: git
-    spec:
-      type: frontend
-      lifecycle: production
-      owner: equipo_frontend
-      providesApis:
-        - portal-private-api
-
-  - apiVersion: backstage.io/v1alpha1
-    kind: Component
-    metadata:
-      name: portal-private-api
-      description: API privada del portal
-      labels:
-        category: backend
-        team: backend_team
-      annotations:
-        deployment_strategy: blue_green
-      urls:
-        - url: https://github.com/mi_empresa/portal-private-api
-          type: git
-    spec:
-      type: api
-      lifecycle: production
-      owner: equipo_api
-      consumesApis:
-        - portal-private-db
-
-  - apiVersion: backstage.io/v1alpha1
-    kind: Component
-    metadata:
-      name: portal-private-db
-      description: Base de datos exclusiva para el API privado del portal
-      labels:
-        category: database
-        team: db_team
-      annotations:
-        backup_policy: weekly
-      urls:
-        - url: https://mi_empresa.com/db-portal
-          type: documentation
-    spec:
-      type: database
-      lifecycle: production
-      owner: equipo_db
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: portal
+  description: Frontend web del portal
+  labels:
+    category: web
+    team: frontend_team
+  annotations:
+    deployment_strategy: canary
+  urls:
+    - url: https://github.com/mi_empresa/portal
+      type: git
+spec:
+  type: frontend
+  lifecycle: production
+  owner: equipo_frontend
+  system: devPortal
+  providesApis:
+    - portal-private-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: portal-private-api
+  description: API privada del portal
+  labels:
+    category: backend
+    team: backend_team
+  annotations:
+    deployment_strategy: blue_green
+  urls:
+    - url: https://github.com/mi_empresa/portal-private-api
+      type: git
+spec:
+  type: openapi
+  lifecycle: production
+  owner: equipo_api
+  system: devPortal
+  definition: |
+    openapi: "3.0.0"
+    info:
+      version: 1.0.0
+      title: Artist API
+      license:
+        name: MIT
+    servers:
+      - url: http://customers.company.net/v1
+    paths:
+      /customers:
+        get:
+          summary: List all customers
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: portal-private-db
+  description: Base de datos exclusiva para el API privado del portal
+  labels:
+    category: database
+    team: db_team
+  annotations:
+    backup_policy: weekly
+  urls:
+    - url: https://mi_empresa.com/db-portal
+      type: documentation
+spec:
+  type: database
+  lifecycle: production
+  owner: equipo_db
+  system: devPortal
+---
