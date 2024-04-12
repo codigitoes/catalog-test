@@ -54,6 +54,8 @@ spec:
   system: devportal
   dependencyOf:
     - resource:default/portal-private-db
+  consumesApis:
+    - portal-private-db
   definition: |
     openapi: "3.0.0"
     info:
@@ -87,8 +89,10 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
-  consumesApis:
+  dependencyOf:
     - resource:default/portal-private-db
+  consumesApis:
+    - portal-private-db
   definition: |
     openapi: "3.0.0"
     info:
