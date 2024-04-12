@@ -26,3 +26,100 @@ spec:
   lifecycle: production
   owner: devportal
   system: devportal
+  dependencyOf:
+    - resource:default/portal-private-access
+    - resource:default/portal-private-library
+  consumesApis:
+    - portal-private-access
+    - portal-private-library
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: portal-private-access
+  description: API access service privada del portal 
+  labels:
+    category: backend
+    team: backend_team
+  annotations:
+    deployment_strategy: blue_green
+  urls:
+    - url: https://github.com/mi_empresa/portal-private-access
+      type: git
+spec:
+  type: openapi
+  lifecycle: production
+  memberOf: devportal-services
+  owner: devportal
+  system: devportal
+  dependsOn:
+    - resource:default/portal-private-db
+  definition: |
+    openapi: "3.0.0"
+    info:
+      version: 1.0.0
+      title: access API
+      license:
+        name: MIT
+    servers:
+      - url: http://access.company.net/v1
+    paths:
+      /access:
+        get:
+          summary: List all access
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: portal-private-library
+  description: API library service privada del portal 
+  labels:
+    category: backend
+    team: backend_team
+  annotations:
+    deployment_strategy: blue_green
+  urls:
+    - url: https://github.com/mi_empresa/portal-private-library
+      type: git
+spec:
+  type: openapi
+  lifecycle: production
+  memberOf: devportal-services
+  owner: devportal
+  system: devportal
+  dependsOn:
+    - resource:default/portal-private-db
+  definition: |
+    openapi: "3.0.0"
+    info:
+      version: 1.0.0
+      title: library API
+      license:
+        name: MIT
+    servers:
+      - url: http://library.company.net/v1
+    paths:
+      /access:
+        get:
+          summary: List all library
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: portal-private-db
+  description: Base de datos exclusiva para el API privado del portal
+  labels:
+    category: database
+    team: db_team
+  annotations:
+    backup_policy: weekly
+  urls:
+    - url: https://mi_empresa.com/db-portal
+      type: documentation
+spec:
+  type: database
+  lifecycle: production
+  memberOf: devportal-services
+  owner: devportal
+  system: devportal
+---
