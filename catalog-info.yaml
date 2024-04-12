@@ -52,7 +52,7 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
-  dependsOn:
+  dependencyOf:
     - resource:default/portal-private-db
   definition: |
     openapi: "3.0.0"
@@ -87,7 +87,7 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
-  dependsOn:
+  consumesApis:
     - resource:default/portal-private-db
   definition: |
     openapi: "3.0.0"
