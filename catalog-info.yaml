@@ -100,9 +100,83 @@ spec:
     servers:
       - url: http://library.company.net/v1
     paths:
-      /access:
+      /library:
         get:
           summary: List all library
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: portal-details-library
+  description: API details library service privada del portal 
+  labels:
+    category: backend
+    team: backend_team
+  annotations:
+    deployment_strategy: blue_green
+  urls:
+    - url: https://github.com/mi_empresa/portal-private-details-library
+      type: git
+spec:
+  type: openapi
+  lifecycle: production
+  memberOf: devportal-services
+  owner: devportal
+  system: devportal
+  apiConsumedBy:
+    - portal
+  dependsOn:
+    - resource:default/portal-private-db
+  definition: |
+    openapi: "3.0.0"
+    info:
+      version: 1.0.0
+      title: library API
+      license:
+        name: MIT
+    servers:
+      - url: http://library.company.net/v1
+    paths:
+      /details/library:
+        get:
+          summary: Details of library
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: portal-details-terraforms
+  description: API details terraforms service privada del portal 
+  labels:
+    category: backend
+    team: backend_team
+  annotations:
+    deployment_strategy: blue_green
+  urls:
+    - url: https://github.com/mi_empresa/portal-private-details-terraforms
+      type: git
+spec:
+  type: openapi
+  lifecycle: production
+  memberOf: devportal-services
+  owner: devportal
+  system: devportal
+  apiConsumedBy:
+    - portal
+  dependsOn:
+    - resource:default/portal-private-db
+  definition: |
+    openapi: "3.0.0"
+    info:
+      version: 1.0.0
+      title: terraforms API
+      license:
+        name: MIT
+    servers:
+      - url: http://terraforms.company.net/v1
+    paths:
+      /details/terraforms:
+        get:
+          summary: Details of terraforms
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
