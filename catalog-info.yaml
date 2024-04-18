@@ -11,6 +11,30 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
+  name: eventor
+  description: Event store
+  labels:
+    category: event
+    team: backend_team
+  annotations:
+    deployment_strategy: canary
+  urls:
+    - url: https://github.com/mi_empresa/eventor
+      type: git
+spec:
+  type: backend
+  lifecycle: production
+  owner: devportal
+  system: devportal
+  apiConsumedBy: 
+    - portal-private-access
+    - portal-private-library
+    - portal-private-details-library
+    - portal-private-details-terraforms
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
   name: portal
   description: Frontend web del portal
   labels:
@@ -51,6 +75,8 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
+  consumesApis: 
+    - eventor
   apiConsumedBy: 
     - portal
   dependsOn:
@@ -88,6 +114,8 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
+  consumesApis: 
+    - eventor
   apiConsumedBy: 
     - portal
   dependsOn:
@@ -125,6 +153,8 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
+  consumesApis: 
+    - eventor
   apiConsumedBy: 
     - portal
   dependsOn:
@@ -162,6 +192,8 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
+  consumesApis: 
+    - eventor
   apiConsumedBy: 
     - portal
   dependsOn:
