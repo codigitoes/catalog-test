@@ -26,9 +26,7 @@ spec:
   lifecycle: production
   owner: devportal
   system: devportal
-  consumesApis:
-    - portal-private-access
-    - portal-private-library
+  consumesApis: ['resource:portal-private-access','resource:portal-private-library','resource:portal-private-details-library','resource:portal-private-details-terraforms']
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
@@ -103,7 +101,7 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: portal-details-library
+  name: portal-private-details-library
   description: API details library service privada del portal 
   labels:
     category: backend
@@ -138,7 +136,7 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: portal-details-terraforms
+  name: portal-private-details-terraforms
   description: API details terraforms service privada del portal 
   labels:
     category: backend
