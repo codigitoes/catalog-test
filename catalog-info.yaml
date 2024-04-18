@@ -26,7 +26,11 @@ spec:
   lifecycle: production
   owner: devportal
   system: devportal
-  consumesApis: ['resource:portal-private-access','resource:portal-private-library','resource:portal-private-details-library','resource:portal-private-details-terraforms']
+  consumesApis: 
+    - portal-private-access
+    - portal-private-library
+    - portal-private-details-library
+    - portal-private-details-terraforms
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
@@ -47,8 +51,10 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
-  apiConsumedBy: ['component:portal']
-  dependsOn: ['resource:portal-private-db']
+  apiConsumedBy: 
+    - portal
+  dependsOn:
+    - portal-private-db
   definition: |
     openapi: "3.0.0"
     info:
@@ -82,8 +88,10 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
-  apiConsumedBy: ['component:portal']
-  dependsOn: ['resource:portal-private-db']
+  apiConsumedBy: 
+    - portal
+  dependsOn:
+    - portal-private-db
   definition: |
     openapi: "3.0.0"
     info:
@@ -117,8 +125,10 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
-  apiConsumedBy: ['component:portal']
-  dependsOn: ['resource:portal-private-db']
+  apiConsumedBy: 
+    - portal
+  dependsOn:
+    - portal-private-db
   definition: |
     openapi: "3.0.0"
     info:
@@ -152,8 +162,10 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
-  apiConsumedBy: ['component:portal']
-  dependsOn: ['resource:portal-private-db']
+  apiConsumedBy: 
+    - portal
+  dependsOn:
+    - portal-private-db
   definition: |
     openapi: "3.0.0"
     info:
