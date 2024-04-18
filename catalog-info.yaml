@@ -36,6 +36,7 @@ spec:
     - portal-private-access
     - portal-private-library
     - portal-private-details-library
+    - portal-private-terraforms
     - portal-private-details-terraforms
 ---
 apiVersion: backstage.io/v1alpha1
@@ -66,53 +67,8 @@ spec:
     - portal-private-access
     - portal-private-library
     - portal-private-details-library
+    - portal-private-terraforms
     - portal-private-details-terraforms
----
-apiVersion: backstage.io/v1alpha1
-kind: API
-metadata:
-  name: portal-private-access
-  description: API access service privada del portal 
-  labels:
-    category: backend
-    team: backend_team
-  annotations:
-    backstage.io/techdocs-ref: dir:.
-    deployment_strategy: canary
-  tags:
-    - backend
-    - devportal
-    - api
-  urls:
-    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
-      type: documentation
-    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
-      type: git
-spec:
-  type: openapi
-  lifecycle: production
-  memberOf: devportal-services
-  owner: devportal
-  system: devportal
-  consumesApis: 
-    - eventor
-  apiConsumedBy: 
-    - portal
-  dependsOn:
-    - portal-private-db
-  definition: |
-    openapi: "3.0.0"
-    info:
-      version: 1.0.0
-      title: access API
-      license:
-        name: MIT
-    servers:
-      - url: http://access.company.net/v1
-    paths:
-      /access:
-        get:
-          summary: List all access
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
@@ -209,6 +165,52 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
+  name: portal-private-terraforms
+  description: API terraforms service privada del portal 
+  labels:
+    category: backend
+    team: backend_team
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    deployment_strategy: canary
+  tags:
+    - backend
+    - devportal
+    - api
+  urls:
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: documentation
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: git
+spec:
+  type: openapi
+  lifecycle: production
+  memberOf: devportal-services
+  owner: devportal
+  system: devportal
+  consumesApis: 
+    - eventor
+  apiConsumedBy: 
+    - portal
+  dependsOn:
+    - portal-private-db
+  definition: |
+    openapi: "3.0.0"
+    info:
+      version: 1.0.0
+      title: library API
+      license:
+        name: MIT
+    servers:
+      - url: http://terraforms.company.net/v1
+    paths:
+      /terraforms:
+        get:
+          summary: List all terraforms modules
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
   name: portal-private-details-terraforms
   description: API details terraforms service privada del portal 
   labels:
@@ -246,11 +248,57 @@ spec:
       license:
         name: MIT
     servers:
-      - url: http://terraforms.company.net/v1
+      - url: http://terraform-details.company.net/v1
     paths:
       /details/terraforms:
         get:
           summary: Details of terraforms
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: portal-private-access
+  description: API access service privada del portal 
+  labels:
+    category: backend
+    team: backend_team
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    deployment_strategy: canary
+  tags:
+    - backend
+    - devportal
+    - api
+  urls:
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: documentation
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: git
+spec:
+  type: openapi
+  lifecycle: production
+  memberOf: devportal-services
+  owner: devportal
+  system: devportal
+  consumesApis: 
+    - eventor
+  apiConsumedBy: 
+    - portal
+  dependsOn:
+    - portal-private-db
+  definition: |
+    openapi: "3.0.0"
+    info:
+      version: 1.0.0
+      title: access API
+      license:
+        name: MIT
+    servers:
+      - url: http://access.company.net/v1
+    paths:
+      /access:
+        get:
+          summary: List all access
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
