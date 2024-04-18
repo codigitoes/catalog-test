@@ -49,10 +49,8 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
-  apiConsumedBy:
-    - portal
-  dependsOn:
-    - resource:default/portal-private-db
+  apiConsumedBy: ['component:portal']
+  dependsOn: ['resource:portal-private-db']
   definition: |
     openapi: "3.0.0"
     info:
@@ -86,10 +84,8 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
-  apiConsumedBy:
-    - portal
-  dependsOn:
-    - resource:default/portal-private-db
+  apiConsumedBy: ['component:portal']
+  dependsOn: ['resource:portal-private-db']
   definition: |
     openapi: "3.0.0"
     info:
@@ -123,10 +119,8 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
-  apiConsumedBy:
-    - portal
-  dependsOn:
-    - resource:default/portal-private-db
+  apiConsumedBy: ['component:portal']
+  dependsOn: ['resource:portal-private-db']
   definition: |
     openapi: "3.0.0"
     info:
@@ -160,10 +154,8 @@ spec:
   memberOf: devportal-services
   owner: devportal
   system: devportal
-  apiConsumedBy:
-    - portal
-  dependsOn:
-    - resource:default/portal-private-db
+  apiConsumedBy: ['component:portal']
+  dependsOn: ['resource:portal-private-db']
   definition: |
     openapi: "3.0.0"
     info:
