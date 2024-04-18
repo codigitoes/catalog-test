@@ -17,6 +17,7 @@ metadata:
     category: event
     team: backend_team
   annotations:
+    backstage.io/techdocs-ref: dir:.
     deployment_strategy: canary
   tags:
     - backend
@@ -44,6 +45,7 @@ metadata:
     category: web
     team: frontend_team
   annotations:
+    backstage.io/techdocs-ref: dir:.
     deployment_strategy: canary
   tags:
     - frontend
@@ -71,7 +73,8 @@ metadata:
     category: backend
     team: backend_team
   annotations:
-    deployment_strategy: blue_green
+    backstage.io/techdocs-ref: dir:.
+    deployment_strategy: canary
   tags:
     - backend
     - devportal
@@ -114,7 +117,8 @@ metadata:
     category: backend
     team: backend_team
   annotations:
-    deployment_strategy: blue_green
+    backstage.io/techdocs-ref: dir:.
+    deployment_strategy: canary
   tags:
     - backend
     - devportal
@@ -157,7 +161,8 @@ metadata:
     category: backend
     team: backend_team
   annotations:
-    deployment_strategy: blue_green
+    backstage.io/techdocs-ref: dir:.
+    deployment_strategy: canary
   tags:
     - backend
     - devportal
@@ -200,7 +205,8 @@ metadata:
     category: backend
     team: backend_team
   annotations:
-    deployment_strategy: blue_green
+    backstage.io/techdocs-ref: dir:.
+    deployment_strategy: canary
   tags:
     - backend
     - devportal
@@ -243,7 +249,8 @@ metadata:
     category: database
     team: db_team
   annotations:
-    backup_policy: weekly
+    backstage.io/techdocs-ref: dir:.
+    deployment_strategy: canary
   urls:
     - url: https://mi_empresa.com/db-portal
       type: documentation
