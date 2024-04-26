@@ -11,6 +11,31 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
+  name: eventor
+  description: Event store
+  labels:
+    category: event
+    team: backend_team
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    deployment_strategy: canary
+  tags:
+    - backend
+    - devportal
+  urls:
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: documentation
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: git
+spec:
+  type: backend
+  lifecycle: production
+  owner: devportal
+  system: devportal
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
   name: portal
   description: Frontend web del portal
   labels:
