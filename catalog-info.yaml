@@ -323,6 +323,38 @@ spec:
       /access:
         get:
           summary: List all access
+        post:
+          summary: Create new access
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    password:
+                      type: string
+          responses:
+            '201':
+              description: Created
+        put:
+          summary: Update existing access
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    password:
+                      type: string
+          responses:
+            '200':
+              description: OK
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
