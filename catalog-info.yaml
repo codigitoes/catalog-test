@@ -1,12 +1,49 @@
----
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: devportal
   description: devPortal discovery demo
+  annotations:
+    sngular.devops-team.io/project-name: markitos-app
+    sngular.devops-team.io/service-name: devportal
+    sngular.devops-team.io/tab-group: devportal-tabs
 spec:
   owner: devportal
   domain: devportal.demo
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: eventor
+  description: Event store
+  labels:
+    category: event
+    team: backend_team
+  annotations:
+    sngular.devops-team.io/project-name: markitos-app
+    sngular.devops-team.io/service-name: eventor
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/tab-group: devportal-tabs
+    deployment_strategy: canary
+  tags:
+    - backend
+    - devportal
+  urls:
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: documentation
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: git
+spec:
+  type: backend
+  lifecycle: production
+  owner: devportal
+  system: devportal
+  apiConsumedBy: 
+    - portal-private-access
+    - portal-private-library
+    - portal-private-details-library
+    - portal-private-terraforms
+    - portal-private-details-terraforms
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -17,7 +54,10 @@ metadata:
     category: web
     team: frontend_team
   annotations:
+    sngular.devops-team.io/project-name: markitos-app
+    sngular.devops-team.io/service-name: portal
     backstage.io/techdocs-ref: dir:.
+    backstage.io/tab-group: devportal-tabs
     deployment_strategy: canary
   tags:
     - frontend
@@ -32,4 +72,280 @@ spec:
   lifecycle: production
   owner: devportal
   system: devportal
+  consumesApis: 
+    - portal-private-access
+    - portal-private-library
+    - portal-private-details-library
+    - portal-private-terraforms
+    - portal-private-details-terraforms
 ---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: portal-private-library
+  description: API library service privada del portal 
+  labels:
+    category: backend
+    team: backend_team
+  annotations:
+    sngular.devops-team.io/project-name: markitos-app
+    sngular.devops-team.io/service-name: portal-private-library
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/tab-group: devportal-tabs
+    deployment_strategy: canary
+  tags:
+    - backend
+    - devportal
+    - api
+  urls:
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: documentation
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: git
+spec:
+  type: openapi
+  lifecycle: production
+  memberOf: devportal-services
+  owner: devportal
+  system: devportal
+  consumesApis: 
+    - eventor
+  apiConsumedBy: 
+    - portal
+  dependsOn:
+    - portal-private-db
+  definition: |
+    openapi: "3.0.0"
+    info:
+      version: 1.0.0
+      title: library API
+      license:
+        name: MIT
+    servers:
+      - url: http://library.company.net/v1
+    paths:
+      /library:
+        get:
+          summary: List all library
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: portal-private-details-library
+  description: API details library service privada del portal 
+  labels:
+    category: backend
+    team: backend_team
+  annotations:
+    sngular.devops-team.io/project-name: markitos-app
+    sngular.devops-team.io/service-name: portal-private-details-library
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/tab-group: devportal-tabs
+    deployment_strategy: canary
+  tags:
+    - backend
+    - devportal
+    - api
+  urls:
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: documentation
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: git
+spec:
+  type: openapi
+  lifecycle: production
+  memberOf: devportal-services
+  owner: devportal
+  system: devportal
+  consumesApis: 
+    - eventor
+  apiConsumedBy: 
+    - portal
+  dependsOn:
+    - portal-private-db
+  definition: |
+    openapi: "3.0.0"
+    info:
+      version: 1.0.0
+      title: library API
+      license:
+        name: MIT
+    servers:
+      - url: http://library.company.net/v1
+    paths:
+      /details/library:
+        get:
+          summary: Details of library
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: portal-private-terraforms
+  description: API terraforms service privada del portal 
+  labels:
+    category: backend
+    team: backend_team
+  annotations:
+    sngular.devops-team.io/project-name: markitos-app
+    sngular.devops-team.io/service-name: portal-private-terraforms
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/tab-group: devportal-tabs
+    deployment_strategy: canary
+  tags:
+    - backend
+    - devportal
+    - api
+  urls:
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: documentation
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: git
+spec:
+  type: openapi
+  lifecycle: production
+  memberOf: devportal-services
+  owner: devportal
+  system: devportal
+  consumesApis: 
+    - eventor
+  apiConsumedBy: 
+    - portal
+  dependsOn:
+    - portal-private-db
+  definition: |
+    openapi: "3.0.0"
+    info:
+      version: 1.0.0
+      title: library API
+      license:
+        name: MIT
+    servers:
+      - url: http://terraforms.company.net/v1
+    paths:
+      /terraforms:
+        get:
+          summary: List all terraforms modules
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: portal-private-details-terraforms
+  description: API details terraforms service privada del portal 
+  labels:
+    category: backend
+    team: backend_team
+  annotations:
+    sngular.devops-team.io/project-name: markitos-app
+    sngular.devops-team.io/service-name: portal-private-details-terraforms
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/tab-group: devportal-tabs
+    deployment_strategy: canary
+  tags:
+    - backend
+    - devportal
+    - api
+  urls:
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: documentation
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: git
+spec:
+  type: openapi
+  lifecycle: production
+  memberOf: devportal-services
+  owner: devportal
+  system: devportal
+  consumesApis: 
+    - eventor
+  apiConsumedBy: 
+    - portal
+  dependsOn:
+    - portal-private-db
+  definition: |
+    openapi: "3.0.0"
+    info:
+      version: 1.0.0
+      title: terraforms API
+      license:
+        name: MIT
+    servers:
+      - url: http://terraform-details.company.net/v1
+    paths:
+      /details/terraforms:
+        get:
+          summary: Details of terraforms
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: portal-private-access
+  description: API access service privada del portal 
+  labels:
+    category: backend
+    team: backend_team
+  annotations:
+    sngular.devops-team.io/project-name: markitos-app
+    sngular.devops-team.io/service-name: portal-private-access
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/tab-group: devportal-tabs
+    deployment_strategy: canary
+  tags:
+    - backend
+    - devportal
+    - api
+  urls:
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: documentation
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: git
+spec:
+  type: openapi
+  lifecycle: production
+  memberOf: devportal-services
+  owner: devportal
+  system: devportal
+  consumesApis: 
+    - eventor
+  apiConsumedBy: 
+    - portal
+  dependsOn:
+    - portal-private-db
+  definition: |
+    openapi: "3.0.0"
+    info:
+      version: 1.0.0
+      title: access API
+      license:
+        name: MIT
+    servers:
+      - url: http://access.company.net/v1
+    paths:
+      /access:
+        get:
+          summary: List all access
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: portal-private-db
+  description: Base de datos exclusiva para el API privado del portal
+  labels:
+    category: database
+    team: db_team
+  annotations:
+    sngular.devops-team.io/project-name: markitos-app
+    sngular.devops-team.io/service-name: portal-private-db
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/tab-group: devportal-tabs
+    deployment_strategy: canary
+  urls:
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: documentation
+    - url: https://github.com/codigitoes/catalog-test/blob/main/catalog-info.yaml
+      type: git
+spec:
+  type: database
+  lifecycle: production
+  memberOf: devportal-services
+  owner: devportal
+  system: devportal
